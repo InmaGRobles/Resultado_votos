@@ -3,688 +3,709 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resumen de votos — Galería Familiar</title>
+<title>Galería Familiar — Elige tus cuadros</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,serif;background:#f7f5f2;color:#1a1714;font-size:15px}
-header{background:#fff;border-bottom:1px solid #e0dbd3;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-header h1{font-size:20px;font-weight:normal}
-header h1 em{font-style:italic;color:#3d6b5e}
-.header-sub{font-family:system-ui,sans-serif;font-size:13px;color:#6b6560}
-.legend{display:flex;gap:10px;flex-wrap:wrap;padding:.6rem 1.5rem;background:#fff;border-bottom:1px solid #e0dbd3}
-.leg-item{display:inline-flex;align-items:center;gap:5px;font-family:system-ui,sans-serif;font-size:12px}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.filters{display:flex;gap:7px;flex-wrap:wrap;padding:.6rem 1.5rem;background:#f0ede8;border-bottom:1px solid #e0dbd3}
-.filter-btn{padding:4px 14px;border-radius:20px;border:1px solid #c8c0b5;background:transparent;color:#6b6560;font-family:system-ui,sans-serif;font-size:12px;cursor:pointer;transition:all .15s}
-.filter-btn.active,.filter-btn:hover{background:#3d6b5e;color:#fff;border-color:#3d6b5e}
-.page{max-width:1100px;margin:0 auto;padding:1.25rem}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.25rem}
-.stat{background:#fff;border:1px solid #e0dbd3;border-radius:10px;padding:.6rem 1rem;font-family:system-ui,sans-serif;min-width:110px}
-.stat-label{font-size:11px;color:#a09890;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.stat-val{font-size:24px;font-weight:300}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
-.card{background:#fff;border:1px solid #e0dbd3;border-radius:12px;overflow:hidden;transition:box-shadow .15s}
-.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.card.disponible{border:1px dashed #a8d5b5;background:#f8fdf9}
-.card.hidden{display:none}
-.card-img-wrap{position:relative;cursor:pointer}
-.card-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#f0ede8}
-.card-placeholder{width:100%;aspect-ratio:4/3;background:#f0ede8;display:flex;align-items:center;justify-content:center;color:#a09890;font-family:system-ui,sans-serif;font-size:11px;flex-direction:column;gap:4px}
-.card-num-badge{position:absolute;top:4px;left:4px;background:rgba(0,0,0,.55);color:#fff;font-family:system-ui,sans-serif;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px}
-.zoom-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.0);transition:background .2s;color:transparent;font-size:28px}
-.card-img-wrap:hover .zoom-hint{background:rgba(0,0,0,.18);color:#fff}
-.card-body{padding:5px 7px 7px}
-.card-title{font-family:system-ui,sans-serif;font-size:10px;font-weight:600;color:#6b6560;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
-.conflict-title{font-family:system-ui,sans-serif;font-size:10px;font-weight:700;color:#c0392b;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
-.fam-tags{display:flex;flex-direction:column;gap:2px}
-.fam-tag{display:inline-flex;align-items:center;gap:4px;font-family:system-ui,sans-serif;font-size:11px;padding:3px 6px;border-radius:6px;font-weight:500}
-.pos-badge{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
-.disponible-tag{font-family:system-ui,sans-serif;font-size:11px;color:#27ae60;font-weight:600;display:flex;align-items:center;gap:4px;padding:1px 0}
-.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;align-items:center;justify-content:center;padding:1rem}
-.lb.open{display:flex}
-.lb img{max-width:92vw;max-height:88vh;border-radius:6px;object-fit:contain}
-.lb-close{position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:26px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.lb-close:hover{background:rgba(255,255,255,.28)}
-.lb-label{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.8);font-family:system-ui,sans-serif;font-size:13px;background:rgba(0,0,0,.4);padding:4px 14px;border-radius:20px;white-space:nowrap}
-.lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:26px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.lb-nav:hover{background:rgba(255,255,255,.28)}
-.lb-prev{left:10px}.lb-next{right:10px}
-@media(max-width:500px){.grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#f7f5f2; --surface:#fff; --surface2:#f0ede8;
+    --border:#e0dbd3; --border-s:#c8c0b5;
+    --text:#1a1714; --text-sec:#6b6560; --text-mut:#a09890;
+    --accent:#3d6b5e; --accent-bg:#eaf2ef; --accent-t:#2a4f45;
+    --gold:#b08030; --gold-bg:#fdf3e0; --gold-t:#7a5520;
+    --danger:#c0392b; --danger-bg:#fdf0ee;
+    --radius:8px;
+  }
+  body { font-family:'Georgia','Times New Roman',serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:16px; line-height:1.6; }
+  .page { max-width:980px; margin:0 auto; padding:0 1.25rem 4rem; }
+  .screen { display:none; }
+  .screen.active { display:block; }
+
+  .site-header { border-bottom:1px solid var(--border); padding:1.1rem 0; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; }
+  .site-title { font-size:18px; font-weight:normal; letter-spacing:.02em; }
+  .site-title em { font-style:italic; color:var(--accent); }
+  .user-pill { display:inline-flex; align-items:center; gap:6px; background:var(--accent-bg); color:var(--accent-t); font-family:system-ui,sans-serif; font-size:13px; padding:4px 12px; border-radius:20px; border:1px solid #c5ddd7; }
+
+  .login-wrap { max-width:480px; margin:2.5rem auto; text-align:center; }
+  .login-wrap h1 { font-size:26px; font-weight:normal; margin-bottom:.4rem; line-height:1.3; }
+  .login-wrap h1 em { font-style:italic; color:var(--accent); }
+  .login-wrap .subtitle { color:var(--text-sec); font-family:system-ui,sans-serif; font-size:14px; margin-bottom:1.75rem; }
+
+  .family-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.25rem; }
+  .fam-btn { padding:14px 16px; border-radius:10px; border:1.5px solid var(--border-s); background:var(--surface); color:var(--text); font-family:system-ui,sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:all .15s; text-align:left; display:flex; align-items:center; gap:10px; }
+  .fam-btn:hover { border-color:var(--accent); background:var(--accent-bg); color:var(--accent-t); }
+  .fam-btn.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+  .fam-icon { width:36px; height:36px; border-radius:50%; background:var(--accent-bg); color:var(--accent-t); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; font-weight:700; }
+  .fam-btn.selected .fam-icon { background:rgba(255,255,255,.2); color:#fff; }
+  .fam-voted { font-size:11px; color:var(--text-mut); margin-top:1px; }
+  .fam-btn.selected .fam-voted { color:rgba(255,255,255,.7); }
+
+  .err { color:var(--danger); font-family:system-ui,sans-serif; font-size:13px; min-height:20px; margin:.5rem 0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:1.25rem 0; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; height:40px; padding:0 20px; border-radius:var(--radius); font-family:system-ui,sans-serif; font-size:14px; font-weight:500; cursor:pointer; border:1px solid transparent; transition:opacity .15s,background .15s; }
+  .btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .btn-primary:hover { opacity:.88; }
+  .btn-primary:disabled { opacity:.38; cursor:not-allowed; }
+  .btn-ghost { background:transparent; color:var(--text-sec); border-color:var(--border-s); }
+  .btn-ghost:hover { background:var(--surface2); }
+  .btn-sm { height:34px; padding:0 14px; font-size:13px; }
+  .btn-lg { height:48px; padding:0 28px; font-size:15px; }
+
+  .gallery-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.1rem; gap:.75rem; flex-wrap:wrap; }
+  .gallery-header h1 { font-size:21px; font-weight:normal; }
+  .gallery-header .sub { color:var(--text-sec); font-family:system-ui,sans-serif; font-size:14px; margin-top:2px; }
+
+  .instr { background:var(--accent-bg); border:1px solid #c5ddd7; border-radius:10px; padding:.9rem 1.1rem; font-family:system-ui,sans-serif; font-size:13.5px; color:var(--accent-t); line-height:1.6; margin-bottom:1.1rem; }
+  .instr strong { font-weight:600; }
+
+  .progress-wrap { margin-bottom:.75rem; }
+  .progress-label { font-family:system-ui,sans-serif; font-size:12px; color:var(--text-sec); margin-bottom:4px; display:flex; justify-content:space-between; }
+  .progress-track { height:5px; background:var(--surface2); border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--accent); border-radius:3px; transition:width .3s; }
+
+  .filter-bar { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:1rem; }
+  .filter-btn { padding:5px 14px; border-radius:20px; border:1px solid var(--border-s); background:transparent; color:var(--text-sec); font-family:system-ui,sans-serif; font-size:13px; cursor:pointer; transition:all .15s; }
+  .filter-btn.active,.filter-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:10px; margin-bottom:1.25rem; }
+  .painting-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; cursor:pointer; transition:border-color .15s,transform .1s; position:relative; user-select:none; }
+  .painting-card:hover { border-color:var(--border-s); transform:translateY(-1px); }
+  .painting-card.selected { border:2.5px solid var(--accent); }
+  .painting-card.hidden { display:none; }
+  .card-img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--surface2); }
+  .card-placeholder { width:100%; aspect-ratio:4/3; background:var(--surface2); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; color:var(--text-mut); font-family:system-ui,sans-serif; font-size:11px; }
+  .card-body { padding:7px 9px; }
+  .card-num { font-family:system-ui,sans-serif; font-size:12px; color:var(--text-sec); }
+  .rank-badge { position:absolute; top:6px; right:6px; width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-family:system-ui,sans-serif; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 4px rgba(0,0,0,.3); }
+
+  /* BARRA INFERIOR */
+  .sel-bar { position:sticky; bottom:0; background:var(--surface); border:1px solid var(--border); border-radius:12px 12px 0 0; padding:.75rem 1.1rem; display:flex; align-items:center; justify-content:space-between; gap:.75rem; box-shadow:0 -4px 20px rgba(0,0,0,.07); }
+  .sel-info { font-family:system-ui,sans-serif; font-size:14px; color:var(--text-sec); }
+  .sel-info strong { color:var(--text); font-weight:600; }
+  .sel-toggle { background:transparent; border:1px solid var(--border-s); border-radius:var(--radius); padding:4px 12px; font-family:system-ui,sans-serif; font-size:13px; color:var(--text-sec); cursor:pointer; display:flex; align-items:center; gap:5px; }
+  .sel-toggle:hover { background:var(--surface2); }
+  /* PANEL DE ORDEN */
+  .order-panel { background:var(--surface); border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; padding:.75rem 1.1rem 1rem; display:none; }
+  .order-panel.open { display:block; }
+  .order-list { list-style:none; display:flex; flex-direction:column; gap:4px; margin-bottom:.75rem; }
+  .order-item { display:flex; align-items:center; gap:8px; background:var(--accent-bg); border:1px solid #c5ddd7; border-radius:var(--radius); padding:6px 10px; font-family:system-ui,sans-serif; font-size:13px; color:var(--accent-t); }
+  .order-num { width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .order-label { flex:1; }
+  .order-btns { display:flex; gap:4px; }
+  .order-btn { background:transparent; border:1px solid #c5ddd7; border-radius:4px; cursor:pointer; color:var(--accent-t); font-size:12px; line-height:1; padding:3px 7px; }
+  .order-btn:hover { background:rgba(0,0,0,.08); }
+  .order-btn:disabled { opacity:.25; cursor:default; }
+  .order-actions { display:flex; justify-content:flex-end; }
+
+  .confirm-wrap { max-width:440px; margin:2.5rem auto; text-align:center; }
+  .confirm-icon { font-size:52px; margin-bottom:.75rem; color:var(--accent); }
+  .confirm-wrap h1 { font-size:24px; font-weight:normal; margin-bottom:.4rem; }
+  .confirm-wrap .subtitle { color:var(--text-sec); font-family:system-ui,sans-serif; font-size:14px; margin-bottom:1.25rem; }
+  .vote-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; text-align:left; margin-bottom:1.25rem; }
+  .vote-row { display:flex; gap:12px; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); }
+  .vote-row:last-child { border-bottom:none; }
+  .vote-num { width:28px; height:28px; border-radius:50%; background:var(--accent-bg); color:var(--accent-t); font-family:system-ui,sans-serif; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .vote-label { font-family:system-ui,sans-serif; font-size:14px; }
+  .vote-sublabel { font-size:12px; color:var(--text-sec); }
+
+  .admin-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:.75rem; }
+  .admin-header h1 { font-size:22px; font-weight:normal; }
+  .sec-heading { font-family:system-ui,sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--text-mut); margin:1.75rem 0 .6rem; }
+  .voter-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:.85rem 1rem; margin-bottom:8px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .voter-name { font-family:system-ui,sans-serif; font-size:14px; font-weight:600; min-width:140px; }
+  .voter-picks { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
+  .pick-pill { font-family:system-ui,sans-serif; font-size:12px; padding:3px 9px; border-radius:20px; }
+  .pick-1 { background:var(--gold-bg); color:var(--gold-t); border:1px solid #e8cfa0; }
+  .pick-2 { background:var(--accent-bg); color:var(--accent-t); border:1px solid #c5ddd7; }
+  .pick-n { background:var(--surface2); color:var(--text-sec); border:1px solid var(--border); }
+  .delete-btn { margin-left:auto; background:transparent; border:none; color:var(--text-mut); cursor:pointer; font-size:16px; padding:4px; border-radius:4px; line-height:1; }
+  .delete-btn:hover { color:var(--danger); background:var(--danger-bg); }
+  .results-table { width:100%; border-collapse:collapse; font-family:system-ui,sans-serif; font-size:13px; background:var(--surface); border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+  .results-table th { text-align:left; padding:9px 13px; border-bottom:1px solid var(--border); color:var(--text-sec); font-weight:600; font-size:12px; background:var(--surface2); }
+  .results-table td { padding:9px 13px; border-bottom:1px solid var(--border); }
+  .results-table tr:last-child td { border-bottom:none; }
+  .results-table tr:hover td { background:var(--bg); }
+  .pts-badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:600; }
+  .pts-gold { background:var(--gold-bg); color:var(--gold-t); border:1px solid #e8cfa0; }
+  .pts-norm { background:var(--surface2); color:var(--text-sec); }
+  .pts-note { font-family:system-ui,sans-serif; font-size:12px; color:var(--text-mut); margin-top:7px; }
+  .stat-cards { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:.7rem 1rem; font-family:system-ui,sans-serif; min-width:120px; }
+  .stat-label { font-size:11px; color:var(--text-mut); text-transform:uppercase; letter-spacing:.05em; margin-bottom:2px; }
+  .stat-val { font-size:26px; font-weight:300; color:var(--text); }
+
+  .adminpw-wrap { max-width:360px; margin:2.5rem auto; text-align:center; }
+  .adminpw-wrap h1 { font-size:22px; font-weight:normal; margin-bottom:.4rem; }
+  .adminpw-wrap p { color:var(--text-sec); font-family:system-ui,sans-serif; font-size:14px; margin-bottom:1.25rem; }
+  input[type=text],input[type=password] { width:100%; height:42px; border:1px solid var(--border-s); border-radius:var(--radius); padding:0 12px; font-size:14px; font-family:system-ui,sans-serif; background:var(--bg); color:var(--text); outline:none; transition:border-color .15s; margin-bottom:.5rem; }
+  input:focus { border-color:var(--accent); }
+
+  /* Loading overlay */
+  .loading { position:fixed; inset:0; background:rgba(247,245,242,.85); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:100; font-family:system-ui,sans-serif; gap:12px; }
+  .loading.hidden { display:none; }
+  .spinner { width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .loading-text { font-size:14px; color:var(--text-sec); }
+
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--text); color:#fff; font-family:system-ui,sans-serif; font-size:13px; padding:9px 18px; border-radius:8px; opacity:0; transition:opacity .2s; pointer-events:none; z-index:999; white-space:nowrap; }
+  .toast.show { opacity:1; }
+
+  .empty-msg { text-align:center; color:var(--text-mut); font-family:system-ui,sans-serif; font-size:14px; padding:2rem 0; }
+
+  @media(max-width:540px) {
+    .family-grid { grid-template-columns:1fr; }
+    .gallery-grid { grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:7px; }
+    .sel-bar { gap:.5rem; }
+  }
+  /* LIGHTBOX */
+  .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+  .lightbox.open { display:flex; }
+  .lightbox-img { max-width:92vw; max-height:88vh; border-radius:6px; object-fit:contain; box-shadow:0 4px 40px rgba(0,0,0,.6); }
+  .lightbox-close { position:fixed; top:16px; right:20px; background:rgba(255,255,255,.15); border:none; color:#fff; font-size:28px; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .lightbox-close:hover { background:rgba(255,255,255,.28); }
+  .lightbox-label { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.8); font-family:system-ui,sans-serif; font-size:14px; background:rgba(0,0,0,.4); padding:4px 14px; border-radius:20px; }
+  .lightbox-nav { position:fixed; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.15); border:none; color:#fff; font-size:22px; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .lightbox-nav:hover { background:rgba(255,255,255,.28); }
+  .lightbox-prev { left:12px; }
+  .lightbox-next { right:12px; }
+  /* Botón lupa en cada tarjeta */
+  .card-zoom { position:absolute; top:6px; left:6px; width:26px; height:26px; border-radius:50%; background:rgba(0,0,0,.45); border:none; color:#fff; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .15s; }
+  .painting-card:hover .card-zoom { opacity:1; }
 </style>
 </head>
 <body>
-<header>
-  <h1><em>Galería</em> Familiar — Resumen de votos</h1>
-  <div class="header-sub">53 cuadros · 6 participantes</div>
-</header>
-<div class="legend"><div class="leg-item"><div class="leg-dot" style="background:#1a5276"></div><span>Fam. Juan</span></div><div class="leg-item"><div class="leg-dot" style="background:#6e2fa0"></div><span>Fam. Jaime</span></div><div class="leg-item"><div class="leg-dot" style="background:#1e8449"></div><span>Fam. Alfonso</span></div><div class="leg-item"><div class="leg-dot" style="background:#b7770d"></div><span>Fam. Antonio</span></div><div class="leg-item"><div class="leg-dot" style="background:#c0392b"></div><span>Fam. Ignacio</span></div><div class="leg-item"><div class="leg-dot" style="background:#616a6b"></div><span>Fam. Jorge</span></div><div class="leg-item"><div class="leg-dot" style="background:#b5651d"></div><span>Helena</span></div></div>
-<div class="filters">
-  <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
-  <button class="filter-btn" onclick="setFilter('elegido',this)">Elegidos</button>
-  <button class="filter-btn" onclick="setFilter('disponible',this)">Disponibles</button>
-  <button class="filter-btn" onclick="setFilter('conflicto',this)">⚠ Con conflicto</button>
-  <button class="filter-btn" onclick="setFilter('Fam. Juan',this)">Fam. Juan</button><button class="filter-btn" onclick="setFilter('Fam. Jaime',this)">Fam. Jaime</button><button class="filter-btn" onclick="setFilter('Fam. Alfonso',this)">Fam. Alfonso</button><button class="filter-btn" onclick="setFilter('Fam. Antonio',this)">Fam. Antonio</button><button class="filter-btn" onclick="setFilter('Fam. Ignacio',this)">Fam. Ignacio</button><button class="filter-btn" onclick="setFilter('Fam. Jorge',this)">Fam. Jorge</button><button class="filter-btn" onclick="setFilter('Helena',this)">Helena</button>
+
+<div class="loading hidden" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loading-text">Cargando…</div>
 </div>
-<div class="page">
-<div class="stats">
-  <div class="stat"><div class="stat-label">Total cuadros</div><div class="stat-val">53</div></div>
-  <div class="stat"><div class="stat-label">Elegidos</div><div class="stat-val" style="color:#3d6b5e">34</div></div>
-  <div class="stat"><div class="stat-label">Disponibles</div><div class="stat-val" style="color:#27ae60">19</div></div>
-  <div class="stat"><div class="stat-label">Con conflicto</div><div class="stat-val" style="color:#c0392b">6</div></div>
+<div class="toast" id="toast"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(null)" aria-label="Cerrar">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)" aria-label="Anterior">‹</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)" aria-label="Siguiente">›</button>
+  <div class="lightbox-label" id="lightbox-label"></div>
 </div>
-<div class="grid" id="grid">
-<div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(1)">
-    <img class="card-img" src="cuadro-01.jpg" alt="Cuadro 1" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 1</span>
+
+<!-- LOGIN -->
+<div id="screen-login" class="screen active">
+  <div class="page">
+    <div class="site-header">
+      <div class="site-title"><em>Galería</em> Familiar</div>
     </div>
-    <div class="card-num-badge">Cuadro 1</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(2)">
-    <img class="card-img" src="cuadro-02.jpg" alt="Cuadro 2" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 2</span>
+    <div class="login-wrap">
+      <h1>Elige los cuadros de <em>tu familia</em></h1>
+      <p class="subtitle">Selecciona tu familia y elige los 10 cuadros que más os gusten, en orden de preferencia.</p>
+      <p style="font-family:system-ui,sans-serif;font-size:13px;color:var(--text-sec);margin-bottom:.75rem;text-align:left">¿A qué familia perteneces?</p>
+      <div class="family-grid" id="family-grid"></div>
+      <div class="err" id="login-err"></div>
+      <button class="btn btn-primary btn-lg" onclick="login()" style="width:100%;margin-bottom:1rem">Entrar a la galería</button>
+      <hr class="divider">
+      <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-adminpw')">🔐 Administrador</button>
     </div>
-    <div class="card-num-badge">Cuadro 2</div>
-    <div class="zoom-hint">🔍</div>
   </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(3)">
-    <img class="card-img" src="cuadro-03.jpg" alt="Cuadro 3" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 3</span>
-    </div>
-    <div class="card-num-badge">Cuadro 3</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(4)">
-    <img class="card-img" src="cuadro-04.jpg" alt="Cuadro 4" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 4</span>
-    </div>
-    <div class="card-num-badge">Cuadro 4</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(5)">
-    <img class="card-img" src="cuadro-05.jpg" alt="Cuadro 5" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 5</span>
-    </div>
-    <div class="card-num-badge">Cuadro 5</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(6)">
-    <img class="card-img" src="cuadro-06.jpg" alt="Cuadro 6" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 6</span>
-    </div>
-    <div class="card-num-badge">Cuadro 6</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(7)">
-    <img class="card-img" src="cuadro-07.jpg" alt="Cuadro 7" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 7</span>
-    </div>
-    <div class="card-num-badge">Cuadro 7</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Antonio|Fam. Ignacio|Fam. Alfonso" data-Fam_Antonio="1" data-Fam_Ignacio="1" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(8)">
-    <img class="card-img" src="cuadro-08.jpg" alt="Cuadro 8" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 8</span>
-    </div>
-    <div class="card-num-badge">Cuadro 8</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 3 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">1</div>Fam. Antonio</span><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">1</div>Fam. Ignacio</span><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">3</div>Fam. Alfonso</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Alfonso" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(9)">
-    <img class="card-img" src="cuadro-09.jpg" alt="Cuadro 9" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 9</span>
-    </div>
-    <div class="card-num-badge">Cuadro 9</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">4</div>Fam. Alfonso</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(10)">
-    <img class="card-img" src="cuadro-10.jpg" alt="Cuadro 10" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 10</span>
-    </div>
-    <div class="card-num-badge">Cuadro 10</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">6</div>Helena</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(11)">
-    <img class="card-img" src="cuadro-11.jpg" alt="Cuadro 11" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 11</span>
-    </div>
-    <div class="card-num-badge">Cuadro 11</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">2</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Alfonso" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(12)">
-    <img class="card-img" src="cuadro-12.jpg" alt="Cuadro 12" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 12</span>
-    </div>
-    <div class="card-num-badge">Cuadro 12</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">6</div>Fam. Alfonso</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(13)">
-    <img class="card-img" src="cuadro-13.jpg" alt="Cuadro 13" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 13</span>
-    </div>
-    <div class="card-num-badge">Cuadro 13</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">5</div>Helena</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(14)">
-    <img class="card-img" src="cuadro-14.jpg" alt="Cuadro 14" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 14</span>
-    </div>
-    <div class="card-num-badge">Cuadro 14</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Juan" data-Fam_Juan="1">
-  <div class="card-img-wrap" onclick="openLb(15)">
-    <img class="card-img" src="cuadro-15.jpg" alt="Cuadro 15" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 15</span>
-    </div>
-    <div class="card-num-badge">Cuadro 15</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d6eaf8;color:#1a5276"><div class="pos-badge" style="background:#1a5276">3</div>Fam. Juan</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(16)">
-    <img class="card-img" src="cuadro-16.jpg" alt="Cuadro 16" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 16</span>
-    </div>
-    <div class="card-num-badge">Cuadro 16</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">3</div>Helena</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(17)">
-    <img class="card-img" src="cuadro-17.jpg" alt="Cuadro 17" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 17</span>
-    </div>
-    <div class="card-num-badge">Cuadro 17</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">4</div>Helena</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Jaime|Fam. Ignacio" data-Fam_Jaime="1" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(18)">
-    <img class="card-img" src="cuadro-18.jpg" alt="Cuadro 18" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 18</span>
-    </div>
-    <div class="card-num-badge">Cuadro 18</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 2 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#f0e6ff;color:#6e2fa0"><div class="pos-badge" style="background:#6e2fa0">1</div>Fam. Jaime</span><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">2</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(19)">
-    <img class="card-img" src="cuadro-19.jpg" alt="Cuadro 19" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 19</span>
-    </div>
-    <div class="card-num-badge">Cuadro 19</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">3</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(20)">
-    <img class="card-img" src="cuadro-20.jpg" alt="Cuadro 20" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 20</span>
-    </div>
-    <div class="card-num-badge">Cuadro 20</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">2</div>Helena</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(21)">
-    <img class="card-img" src="cuadro-21.jpg" alt="Cuadro 21" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 21</span>
-    </div>
-    <div class="card-num-badge">Cuadro 21</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">4</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Juan|Fam. Alfonso" data-Fam_Juan="1" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(22)">
-    <img class="card-img" src="cuadro-22.jpg" alt="Cuadro 22" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 22</span>
-    </div>
-    <div class="card-num-badge">Cuadro 22</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 2 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#d6eaf8;color:#1a5276"><div class="pos-badge" style="background:#1a5276">4</div>Fam. Juan</span><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">8</div>Fam. Alfonso</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Alfonso" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(23)">
-    <img class="card-img" src="cuadro-23.jpg" alt="Cuadro 23" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 23</span>
-    </div>
-    <div class="card-num-badge">Cuadro 23</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">5</div>Fam. Alfonso</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(24)">
-    <img class="card-img" src="cuadro-24.jpg" alt="Cuadro 24" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 24</span>
-    </div>
-    <div class="card-num-badge">Cuadro 24</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">10</div>Fam. Antonio</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(25)">
-    <img class="card-img" src="cuadro-25.jpg" alt="Cuadro 25" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 25</span>
-    </div>
-    <div class="card-num-badge">Cuadro 25</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Helena" data-Helena="1">
-  <div class="card-img-wrap" onclick="openLb(26)">
-    <img class="card-img" src="cuadro-26.jpg" alt="Cuadro 26" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 26</span>
-    </div>
-    <div class="card-num-badge">Cuadro 26</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdf0e0;color:#b5651d"><div class="pos-badge" style="background:#b5651d">1</div>Helena</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Jaime|Fam. Ignacio" data-Fam_Jaime="1" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(27)">
-    <img class="card-img" src="cuadro-27.jpg" alt="Cuadro 27" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 27</span>
-    </div>
-    <div class="card-num-badge">Cuadro 27</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 2 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#f0e6ff;color:#6e2fa0"><div class="pos-badge" style="background:#6e2fa0">2</div>Fam. Jaime</span><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">9</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(28)">
-    <img class="card-img" src="cuadro-28.jpg" alt="Cuadro 28" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 28</span>
-    </div>
-    <div class="card-num-badge">Cuadro 28</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">3</div>Fam. Ignacio</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(29)">
-    <img class="card-img" src="cuadro-29.jpg" alt="Cuadro 29" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 29</span>
-    </div>
-    <div class="card-num-badge">Cuadro 29</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Juan" data-Fam_Juan="1">
-  <div class="card-img-wrap" onclick="openLb(30)">
-    <img class="card-img" src="cuadro-30.jpg" alt="Cuadro 30" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 30</span>
-    </div>
-    <div class="card-num-badge">Cuadro 30</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d6eaf8;color:#1a5276"><div class="pos-badge" style="background:#1a5276">5</div>Fam. Juan</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Juan" data-Fam_Juan="1">
-  <div class="card-img-wrap" onclick="openLb(31)">
-    <img class="card-img" src="cuadro-31.jpg" alt="Cuadro 31" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 31</span>
-    </div>
-    <div class="card-num-badge">Cuadro 31</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d6eaf8;color:#1a5276"><div class="pos-badge" style="background:#1a5276">1</div>Fam. Juan</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Alfonso" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(32)">
-    <img class="card-img" src="cuadro-32.jpg" alt="Cuadro 32" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 32</span>
-    </div>
-    <div class="card-num-badge">Cuadro 32</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">1</div>Fam. Alfonso</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(33)">
-    <img class="card-img" src="cuadro-33.jpg" alt="Cuadro 33" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 33</span>
-    </div>
-    <div class="card-num-badge">Cuadro 33</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(34)">
-    <img class="card-img" src="cuadro-34.jpg" alt="Cuadro 34" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 34</span>
-    </div>
-    <div class="card-num-badge">Cuadro 34</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">5</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Juan" data-Fam_Juan="1">
-  <div class="card-img-wrap" onclick="openLb(35)">
-    <img class="card-img" src="cuadro-35.jpg" alt="Cuadro 35" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 35</span>
-    </div>
-    <div class="card-num-badge">Cuadro 35</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d6eaf8;color:#1a5276"><div class="pos-badge" style="background:#1a5276">2</div>Fam. Juan</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(36)">
-    <img class="card-img" src="cuadro-36.jpg" alt="Cuadro 36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 36</span>
-    </div>
-    <div class="card-num-badge">Cuadro 36</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">8</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(37)">
-    <img class="card-img" src="cuadro-37.jpg" alt="Cuadro 37" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 37</span>
-    </div>
-    <div class="card-num-badge">Cuadro 37</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">6</div>Fam. Antonio</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(38)">
-    <img class="card-img" src="cuadro-38.jpg" alt="Cuadro 38" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 38</span>
-    </div>
-    <div class="card-num-badge">Cuadro 38</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(39)">
-    <img class="card-img" src="cuadro-39.jpg" alt="Cuadro 39" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 39</span>
-    </div>
-    <div class="card-num-badge">Cuadro 39</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Alfonso" data-Fam_Alfonso="1">
-  <div class="card-img-wrap" onclick="openLb(40)">
-    <img class="card-img" src="cuadro-40.jpg" alt="Cuadro 40" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 40</span>
-    </div>
-    <div class="card-num-badge">Cuadro 40</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">2</div>Fam. Alfonso</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(41)">
-    <img class="card-img" src="cuadro-41.jpg" alt="Cuadro 41" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 41</span>
-    </div>
-    <div class="card-num-badge">Cuadro 41</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(42)">
-    <img class="card-img" src="cuadro-42.jpg" alt="Cuadro 42" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 42</span>
-    </div>
-    <div class="card-num-badge">Cuadro 42</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(43)">
-    <img class="card-img" src="cuadro-43.jpg" alt="Cuadro 43" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 43</span>
-    </div>
-    <div class="card-num-badge">Cuadro 43</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(44)">
-    <img class="card-img" src="cuadro-44.jpg" alt="Cuadro 44" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 44</span>
-    </div>
-    <div class="card-num-badge">Cuadro 44</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(45)">
-    <img class="card-img" src="cuadro-45.jpg" alt="Cuadro 45" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 45</span>
-    </div>
-    <div class="card-num-badge">Cuadro 45</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">10</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(46)">
-    <img class="card-img" src="cuadro-46.jpg" alt="Cuadro 46" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 46</span>
-    </div>
-    <div class="card-num-badge">Cuadro 46</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">7</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(47)">
-    <img class="card-img" src="cuadro-47.jpg" alt="Cuadro 47" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 47</span>
-    </div>
-    <div class="card-num-badge">Cuadro 47</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">6</div>Fam. Ignacio</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(48)">
-    <img class="card-img" src="cuadro-48.jpg" alt="Cuadro 48" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 48</span>
-    </div>
-    <div class="card-num-badge">Cuadro 48</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Alfonso|Fam. Antonio" data-Fam_Alfonso="1" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(49)">
-    <img class="card-img" src="cuadro-49.jpg" alt="Cuadro 49" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 49</span>
-    </div>
-    <div class="card-num-badge">Cuadro 49</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 2 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#d5f5e3;color:#1e8449"><div class="pos-badge" style="background:#1e8449">7</div>Fam. Alfonso</span><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">7</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Antonio" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(50)">
-    <img class="card-img" src="cuadro-50.jpg" alt="Cuadro 50" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 50</span>
-    </div>
-    <div class="card-num-badge">Cuadro 50</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">8</div>Fam. Antonio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="0" data-familias="Fam. Ignacio" data-Fam_Ignacio="1">
-  <div class="card-img-wrap" onclick="openLb(51)">
-    <img class="card-img" src="cuadro-51.jpg" alt="Cuadro 51" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 51</span>
-    </div>
-    <div class="card-num-badge">Cuadro 51</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="card-title">Elegido por</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">5</div>Fam. Ignacio</span></div></div>
-</div><div class="card" data-elegido="1" data-conflicto="1" data-familias="Fam. Ignacio|Fam. Antonio" data-Fam_Ignacio="1" data-Fam_Antonio="1">
-  <div class="card-img-wrap" onclick="openLb(52)">
-    <img class="card-img" src="cuadro-52.jpg" alt="Cuadro 52" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 52</span>
-    </div>
-    <div class="card-num-badge">Cuadro 52</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="conflict-title">⚠ 2 familias lo quieren</div><div class="fam-tags"><span class="fam-tag" style="background:#fdedec;color:#c0392b"><div class="pos-badge" style="background:#c0392b">4</div>Fam. Ignacio</span><span class="fam-tag" style="background:#fef9e7;color:#b7770d"><div class="pos-badge" style="background:#b7770d">9</div>Fam. Antonio</span></div></div>
-</div><div class="card disponible" data-elegido="0" data-conflicto="0" data-familias="" >
-  <div class="card-img-wrap" onclick="openLb(53)">
-    <img class="card-img" src="cuadro-53.jpg" alt="Cuadro 53" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-placeholder" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Cuadro 53</span>
-    </div>
-    <div class="card-num-badge">Cuadro 53</div>
-    <div class="zoom-hint">🔍</div>
-  </div>
-  <div class="card-body"><div class="disponible-tag">✓ Disponible</div></div>
 </div>
+
+<!-- ADMIN PW -->
+<div id="screen-adminpw" class="screen">
+  <div class="page">
+    <div class="site-header"><div class="site-title"><em>Galería</em> Familiar</div></div>
+    <div class="adminpw-wrap">
+      <h1>Área de administración</h1>
+      <p>Introduce la contraseña para ver los resultados.</p>
+      <input type="password" id="pw-input" placeholder="Contraseña…" onkeydown="if(event.key==='Enter')checkPw()" />
+      <div class="err" id="pw-err"></div>
+      <button class="btn btn-primary" onclick="checkPw()" style="width:100%;margin-bottom:.6rem">Acceder</button>
+      <button class="btn btn-ghost" onclick="showScreen('screen-login')" style="width:100%">Volver</button>
+
+    </div>
+  </div>
 </div>
+
+<!-- GALLERY -->
+<div id="screen-gallery" class="screen">
+  <div class="page">
+    <div class="site-header">
+      <div class="site-title"><em>Galería</em> Familiar</div>
+      <div class="user-pill" id="user-pill">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm-5 6a5 5 0 0110 0H3z"/></svg>
+        <span id="user-display"></span>
+      </div>
+    </div>
+    <div class="gallery-header">
+      <div>
+        <h1>Elegid vuestros cuadros favoritos</h1>
+        <div class="sub">Tocad los cuadros en orden de preferencia — del más al menos deseado</div>
+      </div>
+    </div>
+    <div class="instr">
+      <strong>¿Cómo funciona?</strong> Haced clic en los cuadros en orden: el primero será vuestra <strong>primera opción</strong>, el segundo la <strong>segunda</strong>… podéis elegir entre <strong>2 y 10 cuadros</strong>. Haced clic en uno ya elegido para deseleccionarlo.
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Progreso</span><span id="prog-text">0 / 10</span></div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
+      <button class="filter-btn" onclick="setFilter('selected',this)">Mis elegidos</button>
+      <button class="filter-btn" onclick="setFilter('pending',this)">Sin elegir</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <div class="sel-bar">
+      <div class="sel-info" id="sel-info">Selecciona hasta 10 cuadros</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="sel-toggle" id="order-toggle" onclick="toggleOrderPanel()" style="display:none">
+          <span id="order-toggle-label">Ver orden ▲</span>
+        </button>
+        <button class="btn btn-primary" id="btn-submit" onclick="submitVote()" disabled>Guardar</button>
+      </div>
+    </div>
+    <div class="order-panel" id="order-panel">
+      <ul class="order-list" id="sel-chips"></ul>
+      <div class="order-actions">
+        <button class="btn btn-primary" onclick="submitVote()" id="btn-submit2" disabled>Guardar preferencias</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
-  <button class="lb-close" onclick="closeLb()">✕</button>
-  <button class="lb-nav lb-prev" onclick="navLb(-1)">‹</button>
-  <img id="lb-img" src="" alt="">
-  <button class="lb-nav lb-next" onclick="navLb(1)">›</button>
-  <div class="lb-label" id="lb-label"></div>
+
+<!-- CONFIRM -->
+<div id="screen-confirm" class="screen">
+  <div class="page">
+    <div class="site-header"><div class="site-title"><em>Galería</em> Familiar</div></div>
+    <div class="confirm-wrap">
+      <div class="confirm-icon">✓</div>
+      <h1>¡Preferencias guardadas!</h1>
+      <p class="subtitle">Las elecciones de vuestra familia han quedado registradas en nuestra hoja de cálculo.</p>
+      <div class="vote-card" id="confirm-card"></div>
+      <button class="btn btn-ghost" onclick="showScreen('screen-login');currentFamily=null" style="width:100%">Volver al inicio</button>
+    </div>
+  </div>
 </div>
+
+<!-- ADMIN -->
+<div id="screen-admin" class="screen">
+  <div class="page">
+    <div class="site-header"><div class="site-title"><em>Galería</em> Familiar — Resultados</div></div>
+    <div class="admin-header">
+      <h1>Panel de administración</h1>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="loadAdmin()">↺ Actualizar</button>
+        <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ Exportar CSV</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearAll()">🗑 Borrar todos</button>
+        <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-login')">← Salir</button>
+      </div>
+    </div>
+    <div class="stat-cards" id="admin-stats"></div>
+    <div class="sec-heading">Votos por familia</div>
+    <div id="admin-voters"></div>
+    <div class="sec-heading">Cuadros más deseados</div>
+    <table class="results-table">
+      <thead><tr><th>#</th><th>Cuadro</th><th>1.ª elección</th><th>Familias</th><th>Puntuación</th></tr></thead>
+      <tbody id="results-body"></tbody>
+    </table>
+    <p class="pts-note">Puntuación: 1.ª = 10 pts · 2.ª = 9 pts · … · 10.ª = 1 pt</p>
+  </div>
+</div>
+
 <script>
-let lbN=1;
-const NUM=53;
-function openLb(n){lbN=n;document.getElementById('lb-img').src='cuadro-'+String(n).padStart(2,'0')+'.jpg';document.getElementById('lb-label').textContent='Cuadro '+n;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
-function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
-function navLb(d){const nx=lbN+d;if(nx>=1&&nx<=NUM)openLb(nx);}
-document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')navLb(-1);if(e.key==='ArrowRight')navLb(1);});
-function setFilter(f,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.card').forEach(card=>{
-    if(f==='all'){card.classList.remove('hidden');return;}
-    if(f==='elegido'){card.classList.toggle('hidden',card.dataset.elegido!=='1');return;}
-    if(f==='disponible'){card.classList.toggle('hidden',card.dataset.elegido==='1');return;}
-    if(f==='conflicto'){card.classList.toggle('hidden',card.dataset.conflicto!=='1');return;}
-    const fams=card.dataset.familias?card.dataset.familias.split('|'):[];
-    card.classList.toggle('hidden',!fams.includes(f));
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwM6pgr8supyfs0IaDuRHs-O1rcVPymxg-ngyv5N9FUvtNeZN1yV9OzPeVjzuIbRX5W/exec';
+const ADMIN_PW   = '1971';
+const NUM_CUADROS = 53;
+const MAX_SEL     = 10;
+const MIN_SEL     = 2;
+const FAMILIES    = ['Fam. Juan','Fam. Jaime','Fam. Alfonso','Fam. Antonio','Fam. Ignacio','Fam. Jorge'];
+
+let currentFamily = null;
+let selections    = [];
+let currentFilter = 'all';
+let cachedVotes   = {};
+
+// ---- UI ----
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showToast(msg) {
+  const t=document.getElementById('toast'); t.textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800);
+}
+function showLoading(msg='Cargando…') {
+  document.getElementById('loading-text').textContent=msg;
+  document.getElementById('loading').classList.remove('hidden');
+}
+function hideLoading() { document.getElementById('loading').classList.add('hidden'); }
+
+// ---- API (JSONP para evitar CORS con Google Apps Script) ----
+function apiCall(params) {
+  return new Promise((resolve, reject) => {
+    const cbName = 'gs_cb_' + Date.now();
+    const url = new URL(SCRIPT_URL);
+    Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
+    url.searchParams.set('callback', cbName);
+
+    const script = document.createElement('script');
+    script.src = url.toString();
+
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('Timeout'));
+    }, 15000);
+
+    window[cbName] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    script.onerror = () => { cleanup(); reject(new Error('Error de red')); };
+    document.head.appendChild(script);
   });
 }
+
+// ---- LOAD VOTES ----
+async function loadVotes() {
+  try {
+    const data = await apiCall({action:'load'});
+    cachedVotes = data.votes || {};
+    return cachedVotes;
+  } catch(e) {
+    console.error(e);
+    return {};
+  }
+}
+
+// ---- FAMILY BUTTONS ----
+async function buildFamilyButtons(votes) {
+  const grid = document.getElementById('family-grid');
+  grid.innerHTML = FAMILIES.map(fam => {
+    const hasVoted = !!(votes && votes[fam] && votes[fam].length);
+    const initials = fam.replace('Fam. ','').slice(0,2).toUpperCase();
+    return `<button class="fam-btn" onclick="selectFamily(this,'${fam}')">
+      <div class="fam-icon">${initials}</div>
+      <div>
+        <div class="fam-name">${fam}</div>
+        <div class="fam-voted">${hasVoted ? '✓ Votó — puede modificar' : 'Sin votar aún'}</div>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+function selectFamily(btn, fam) {
+  document.querySelectorAll('.fam-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentFamily = fam;
+  document.getElementById('login-err').textContent='';
+}
+
+async function login() {
+  const err = document.getElementById('login-err');
+  if (!currentFamily) { err.textContent='Selecciona tu familia para continuar'; return; }
+  err.textContent='';
+
+  document.getElementById('user-display').textContent = currentFamily;
+  // Si ya votó, cargamos sus selecciones previas para que pueda completar o modificar
+  if (cachedVotes[currentFamily] && cachedVotes[currentFamily].length) {
+    selections = cachedVotes[currentFamily].slice();
+  } else {
+    selections = [];
+  }
+  currentFilter = 'all';
+  buildGallery();
+  showScreen('screen-gallery');
+}
+
+// ---- GALLERY ----
+function buildGallery() {
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = '';
+  for (let i=1; i<=NUM_CUADROS; i++) {
+    const card = document.createElement('div');
+    card.className='painting-card'; card.id=`card-${i}`;
+    card.setAttribute('role','button'); card.tabIndex=0;
+    card.setAttribute('aria-label',`Cuadro ${i}`);
+    card.onclick=()=>toggleSelect(i);
+    card.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSelect(i);} };
+
+    const num = String(i).padStart(2,'0');
+    const img = document.createElement('img');
+    img.className='card-img'; img.alt=`Cuadro ${i}`; img.loading='lazy';
+    const exts=['jpg','jpeg','png','webp']; let ei=0;
+    function tryNext(){ img.src=`cuadro-${num}.${exts[ei++]}`; }
+    img.onerror=()=>{
+      if(ei<exts.length){ tryNext(); }
+      else {
+        const ph=document.createElement('div'); ph.className='card-placeholder';
+        ph.innerHTML=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Cuadro ${i}</span>`;
+        card.replaceChild(ph,img);
+      }
+    };
+    tryNext();
+
+    const zoom=document.createElement('button');
+    zoom.className='card-zoom'; zoom.innerHTML='🔍';
+    zoom.setAttribute('aria-label',`Ampliar cuadro ${i}`);
+    zoom.onclick=(e)=>{ e.stopPropagation(); openLightbox(i); };
+
+    const body=document.createElement('div'); body.className='card-body';
+    body.innerHTML=`<div class="card-num">Cuadro ${i}</div>`;
+    card.appendChild(img); card.appendChild(zoom); card.appendChild(body);
+    grid.appendChild(card);
+  }
+  updateUI();
+}
+
+function toggleSelect(id) {
+  const idx=selections.indexOf(id);
+  if(idx!==-1){ selections.splice(idx,1); }
+  else {
+    if(selections.length>=MAX_SEL){ showToast(`Máximo ${MAX_SEL} cuadros. Deselecciona uno primero.`); return; }
+    selections.push(id);
+  }
+  updateCards(); updateUI();
+  if(currentFilter!=='all') applyFilter(currentFilter);
+}
+
+function updateCards() {
+  for(let i=1;i<=NUM_CUADROS;i++){
+    const card=document.getElementById(`card-${i}`); if(!card)continue;
+    card.querySelectorAll('.rank-badge').forEach(b=>b.remove());
+    const rank=selections.indexOf(i);
+    if(rank!==-1){
+      card.classList.add('selected');
+      const badge=document.createElement('div'); badge.className='rank-badge';
+      badge.textContent=rank+1; card.appendChild(badge);
+    } else { card.classList.remove('selected'); }
+  }
+}
+
+function updateUI() {
+  const n=selections.length;
+  document.getElementById('prog-fill').style.width=Math.round(n/MAX_SEL*100)+'%';
+  document.getElementById('prog-text').textContent=`${n} / ${MAX_SEL}`;
+  const info=document.getElementById('sel-info');
+  if(n===0) info.innerHTML=`Selecciona entre <strong>${MIN_SEL}</strong> y <strong>${MAX_SEL}</strong> cuadros`;
+  else if(n<MIN_SEL) info.innerHTML=`<strong>${n}</strong> elegido — selecciona al menos <strong>${MIN_SEL}</strong>`;
+  else if(n<MAX_SEL) info.innerHTML=`<strong>${n}</strong> elegidos — podéis añadir <strong>${MAX_SEL-n}</strong> más o guardar ya`;
+  else info.innerHTML=`<strong>¡${MAX_SEL} cuadros elegidos!</strong> Ya podéis guardar.`;
+  const chips = document.getElementById('sel-chips');
+  chips.innerHTML = n === 0 ? '' : selections.map((id,i) => `
+    <li class="order-item">
+      <div class="order-num">${i+1}</div>
+      <div class="order-label">Cuadro ${id}</div>
+      <div class="order-btns">
+        <button class="order-btn" onclick="moveSelection(${i},-1)" ${i===0?'disabled':''}>▲ Subir</button>
+        <button class="order-btn" onclick="moveSelection(${i}, 1)" ${i===n-1?'disabled':''}>▼ Bajar</button>
+      </div>
+    </li>`).join('');
+  const canSubmit = n >= MIN_SEL;
+  document.getElementById('btn-submit').disabled = !canSubmit;
+  document.getElementById('btn-submit2').disabled = !canSubmit;
+  const toggle = document.getElementById('order-toggle');
+  toggle.style.display = n > 0 ? 'flex' : 'none';
+}
+
+function setFilter(f,el) {
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); applyFilter(f);
+}
+function applyFilter(f) {
+  for(let i=1;i<=NUM_CUADROS;i++){
+    const card=document.getElementById(`card-${i}`); if(!card)continue;
+    if(f==='all') card.classList.remove('hidden');
+    else if(f==='selected') card.classList.toggle('hidden',!selections.includes(i));
+    else card.classList.toggle('hidden',selections.includes(i));
+  }
+}
+
+// ---- SUBMIT ----
+async function submitVote() {
+  if(selections.length<MIN_SEL) return;
+  showLoading('Guardando en Google Sheets…');
+  try {
+    const data = await apiCall({
+      action: 'save',
+      family: currentFamily,
+      picks: JSON.stringify(selections)
+    });
+    if(data.ok) {
+      cachedVotes[currentFamily] = selections.slice();
+      const labels=['1.ª','2.ª','3.ª','4.ª','5.ª','6.ª','7.ª','8.ª','9.ª','10.ª'];
+      document.getElementById('confirm-card').innerHTML=selections.map((id,i)=>`
+        <div class="vote-row">
+          <div class="vote-num">${i+1}</div>
+          <div class="vote-label">Cuadro ${id}<div class="vote-sublabel">${labels[i]} elección</div></div>
+        </div>`).join('');
+      hideLoading();
+      showScreen('screen-confirm');
+    } else {
+      hideLoading();
+      showToast('Error al guardar. Inténtalo de nuevo.');
+    }
+  } catch(e) {
+    hideLoading();
+    showToast('Error de conexión. Comprueba internet.');
+  }
+}
+
+// ---- ADMIN ----
+function checkPw() {
+  const pw=document.getElementById('pw-input').value.trim();
+  if(pw===ADMIN_PW){ showScreen('screen-admin'); loadAdmin(); }
+  else document.getElementById('pw-err').textContent='Contraseña incorrecta';
+}
+
+async function loadAdmin() {
+  showLoading('Cargando resultados…');
+  const votes = await loadVotes();
+  hideLoading();
+
+  const voters = Object.keys(votes).filter(k=>votes[k]&&votes[k].length);
+
+  document.getElementById('admin-stats').innerHTML=[
+    {label:'Familias han votado', val:voters.length},
+    {label:'Pendientes', val:FAMILIES.length-voters.length},
+    {label:'Total cuadros', val:NUM_CUADROS},
+  ].map(s=>`<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-val">${s.val}</div></div>`).join('');
+
+  const votersEl=document.getElementById('admin-voters');
+  votersEl.innerHTML = FAMILIES.map(fam=>{
+    const picks=votes[fam];
+    if(!picks||!picks.length) return `<div class="voter-card" style="opacity:.5">
+      <div class="voter-name">${fam}</div>
+      <div style="font-family:system-ui,sans-serif;font-size:12px;color:var(--text-mut)">Sin votar todavía</div></div>`;
+    const pillCls=(i)=>i===0?'pick-1':i===1?'pick-2':'pick-n';
+    const pills=picks.map((id,i)=>`<span class="pick-pill ${pillCls(i)}">${i+1}.º: C${id}</span>`).join('');
+    return `<div class="voter-card">
+      <div><div class="voter-name">${fam}</div><div style="font-family:system-ui,sans-serif;font-size:12px;color:var(--text-sec)">${picks.length} cuadros</div></div>
+      <div class="voter-picks">${pills}</div>
+      <button class="delete-btn" onclick="deleteVoter('${fam.replace(/'/g,"\\'")}')">✕</button></div>`;
+  }).join('');
+
+  // Ranking
+  const scores={},firstPl={},totalV={};
+  voters.forEach(fam=>{
+    votes[fam].forEach((id,i)=>{
+      const pts=MAX_SEL-i;
+      scores[id]=(scores[id]||0)+pts;
+      totalV[id]=(totalV[id]||0)+1;
+      if(i===0) firstPl[id]=(firstPl[id]||0)+1;
+    });
+  });
+  const sorted=Object.keys(scores).sort((a,b)=>scores[b]-scores[a]);
+  const tbody=document.getElementById('results-body');
+  if(!sorted.length){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--text-mut);padding:1.5rem">Sin datos aún</td></tr>'; return; }
+  tbody.innerHTML=sorted.map((id,i)=>`<tr>
+    <td style="color:var(--text-mut)">${i+1}</td>
+    <td>Cuadro ${id}</td>
+    <td>${firstPl[id]||0}x</td>
+    <td>${totalV[id]} familia${totalV[id]!==1?'s':''}</td>
+    <td><span class="pts-badge ${i<3?'pts-gold':'pts-norm'}">${scores[id]} pts${i===0?' ★':''}</span></td>
+  </tr>`).join('');
+}
+
+async function deleteVoter(fam) {
+  if(!confirm(`¿Borrar el voto de ${fam}?`)) return;
+  showLoading('Borrando…');
+  try {
+    await apiCall({action:'delete', family:fam});
+    showToast(`Voto de ${fam} eliminado`);
+    await loadAdmin();
+  } catch(e) { hideLoading(); showToast('Error al borrar'); }
+}
+
+async function clearAll() {
+  if(!confirm('¿Borrar TODOS los votos? No se puede deshacer.')) return;
+  showLoading('Borrando todos los votos…');
+  try {
+    await apiCall({action:'clear'});
+    showToast('Todos los votos eliminados');
+    await loadAdmin();
+  } catch(e) { hideLoading(); showToast('Error al borrar'); }
+}
+
+function exportCSV() {
+  const votes=cachedVotes; const voters=Object.keys(votes).filter(k=>votes[k]&&votes[k].length);
+  if(!voters.length){ showToast('Sin datos para exportar'); return; }
+  const rows=[['Familia',...Array.from({length:MAX_SEL},(_,i)=>`${i+1}.ª elección`)]];
+  voters.forEach(fam=>rows.push([fam,...(votes[fam]||[]).map(id=>`Cuadro ${id}`)]));
+  const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
+  a.download='galeria-votos.csv'; a.click(); showToast('CSV descargado');
+}
+
+// ---- REORDENAR ----
+function moveSelection(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= selections.length) return;
+  const tmp = selections[idx];
+  selections[idx] = selections[newIdx];
+  selections[newIdx] = tmp;
+  updateCards();
+  updateUI();
+}
+
+function toggleOrderPanel() {
+  const panel = document.getElementById('order-panel');
+  const label = document.getElementById('order-toggle-label');
+  const open = panel.classList.toggle('open');
+  label.textContent = open ? 'Ocultar orden ▼' : 'Ver orden ▲';
+}
+
+// ---- LIGHTBOX ----
+let lbCurrent = 1;
+
+function openLightbox(num) {
+  lbCurrent = num;
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  const label = document.getElementById('lightbox-label');
+  const n = String(num).padStart(2,'0');
+  img.src = `cuadro-${n}.jpg`;
+  img.alt = `Cuadro ${num}`;
+  label.textContent = `Cuadro ${num}`;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir, e) {
+  e.stopPropagation();
+  const next = lbCurrent + dir;
+  if (next < 1 || next > NUM_CUADROS) return;
+  openLightbox(next);
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow=''; }
+  if (e.key === 'ArrowLeft') lightboxNav(-1, { stopPropagation:()=>{} });
+  if (e.key === 'ArrowRight') lightboxNav(1, { stopPropagation:()=>{} });
+});
+
+// ---- INIT ----
+(async()=>{
+  showLoading('Iniciando galería…');
+  const votes = await loadVotes();
+  hideLoading();
+  buildFamilyButtons(votes);
+})();
 </script>
 </body>
 </html>
